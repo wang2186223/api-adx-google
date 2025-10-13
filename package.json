@@ -1,0 +1,27 @@
+{
+  "name": "api-adx-google",
+  "version": "1.0.0",
+  "description": "ADX Google数据监控面板",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site, no build needed'",
+    "start": "vercel dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wang2186223/api-adx-google.git"
+  },
+  "keywords": [
+    "adx",
+    "google",
+    "analytics",
+    "dashboard",
+    "monitoring"
+  ],
+  "author": "wang2186223",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^32.5.0"
+  }
+}

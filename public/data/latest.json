@@ -1,0 +1,53 @@
+[
+  {
+    "date": "2025-10-13",
+    "site": "adx.myfreenovel.com",
+    "url": "myfreenovel.com",
+    "adunit": "banner_1",
+    "ad_unit_1": "myfreenovel.com",
+    "ad_unit_code": null,
+    "clicks": "1",
+    "impressions": "31",
+    "ecpm": "0.16173",
+    "ad_request": "202",
+    "responses_served": "31",
+    "match_rate": "15.346534653465346",
+    "total_active_view_measurable_imp": "0",
+    "revenue": "0.005013999994844198",
+    "country": ""
+  },
+  {
+    "date": "2025-10-13",
+    "site": "adx.myfreenovel.com",
+    "url": "myfreenovel.com",
+    "adunit": "banner_2",
+    "ad_unit_1": "myfreenovel.com",
+    "ad_unit_code": null,
+    "clicks": "0",
+    "impressions": "19",
+    "ecpm": "0.130569",
+    "ad_request": "88",
+    "responses_served": "20",
+    "match_rate": "22.727272727272727",
+    "total_active_view_measurable_imp": "0",
+    "revenue": "0.002481000032275915",
+    "country": ""
+  },
+  {
+    "date": "2025-10-12",
+    "site": "adx.myfreenovel.com",
+    "url": "myfreenovel.com",
+    "adunit": "banner_1",
+    "ad_unit_1": "myfreenovel.com",
+    "ad_unit_code": null,
+    "clicks": "2",
+    "impressions": "45",
+    "ecpm": "0.18234",
+    "ad_request": "234",
+    "responses_served": "45",
+    "match_rate": "19.230769230769234",
+    "total_active_view_measurable_imp": "0",
+    "revenue": "0.008205300048828125",
+    "country": ""
+  }
+]

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADX数据监控面板 - www.adx-google.com</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <h1><i class="fas fa-chart-line"></i> ADX数据监控面板</h1>
+                <p class="site-domain">www.adx-google.com/word/my</p>
+            </div>
+            <div class="header-info">
+                <a href="#detailed-report" class="word-report-btn">
+                    <i class="fas fa-file-alt"></i> 详细报告
+                </a>
+                <span id="lastUpdate">最后更新: --</span>
+                <button id="refreshBtn" class="refresh-btn">
+                    <i class="fas fa-sync-alt"></i> 刷新数据
+                </button>
+            </div>
+        </header>
+
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-mouse-pointer"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>总点击数</h3>
+                    <span id="totalClicks" class="stat-number">--</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>总展示数</h3>
+                    <span id="totalImpressions" class="stat-number">--</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>总收入</h3>
+                    <span id="totalRevenue" class="stat-number">--</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>平均CTR</h3>
+                    <span id="avgCTR" class="stat-number">--</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-container">
+                <h3><i class="fas fa-chart-bar"></i> 日收入趋势</h3>
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3><i class="fas fa-chart-pie"></i> 广告位表现</h3>
+                <canvas id="adunitChart"></canvas>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label for="dateFilter">日期筛选:</label>
+                <select id="dateFilter">
+                    <option value="all">所有日期</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="siteFilter">站点筛选:</label>
+                <select id="siteFilter">
+                    <option value="all">所有站点</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="adunitFilter">广告位筛选:</label>
+                <select id="adunitFilter">
+                    <option value="all">所有广告位</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="data-table-container">
+            <h3><i class="fas fa-table"></i> 详细数据</h3>
+            <div class="table-controls">
+                <input type="text" id="searchInput" placeholder="搜索...">
+                <button id="exportBtn" class="export-btn">
+                    <i class="fas fa-download"></i> 导出CSV
+                </button>
+            </div>
+            <div class="table-wrapper">
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>站点</th>
+                            <th>广告位</th>
+                            <th>点击数</th>
+                            <th>展示数</th>
+                            <th>收入</th>
+                            <th>eCPM</th>
+                            <th>CTR</th>
+                            <th>匹配率</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody">
+                        <!-- 数据将通过JavaScript动态加载 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 详细报告部分 -->
+        <div id="detailed-report" class="report-section">
+            <h2><i class="fas fa-chart-pie"></i> 执行摘要</h2>
+            <div class="summary-grid">
+                <div class="summary-card revenue">
+                    <div class="summary-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>总收入</h3>
+                        <div class="summary-value" id="summaryRevenue">$0.00</div>
+                        <div class="summary-change" id="revenueChange">--</div>
+                    </div>
+                </div>
+                <div class="summary-card impressions">
+                    <div class="summary-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>总展示数</h3>
+                        <div class="summary-value" id="summaryImpressions">0</div>
+                        <div class="summary-change" id="impressionsChange">--</div>
+                    </div>
+                </div>
+                <div class="summary-card clicks">
+                    <div class="summary-icon">
+                        <i class="fas fa-mouse-pointer"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>总点击数</h3>
+                        <div class="summary-value" id="summaryClicks">0</div>
+                        <div class="summary-change" id="clicksChange">--</div>
+                    </div>
+                </div>
+                <div class="summary-card ctr">
+                    <div class="summary-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>平均CTR</h3>
+                        <div class="summary-value" id="summaryCTR">0.00%</div>
+                        <div class="summary-change" id="ctrChange">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 趋势分析 -->
+        <div class="report-section">
+            <h2><i class="fas fa-chart-line"></i> 趋势分析</h2>
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h3>收入趋势</h3>
+                    <canvas id="detailedRevenueChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>展示与点击趋势</h3>
+                    <canvas id="impressionClickChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 站点分析 -->
+        <div class="report-section">
+            <h2><i class="fas fa-globe"></i> 站点表现分析</h2>
+            <div class="site-analysis">
+                <div class="chart-container">
+                    <h3>站点收入分布</h3>
+                    <canvas id="siteRevenueChart"></canvas>
+                </div>
+                <div class="site-table-container">
+                    <h3>站点详细数据</h3>
+                    <table class="site-table">
+                        <thead>
+                            <tr>
+                                <th>站点</th>
+                                <th>收入</th>
+                                <th>展示数</th>
+                                <th>点击数</th>
+                                <th>CTR</th>
+                                <th>eCPM</th>
+                            </tr>
+                        </thead>
+                        <tbody id="siteTableBody">
+                            <!-- 动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 广告位分析 -->
+        <div class="report-section">
+            <h2><i class="fas fa-th-large"></i> 广告位表现分析</h2>
+            <div class="adunit-analysis">
+                <div class="chart-container">
+                    <h3>广告位收入对比</h3>
+                    <canvas id="adunitRevenueChart"></canvas>
+                </div>
+                <div class="adunit-metrics">
+                    <h3>广告位关键指标</h3>
+                    <div id="adunitMetrics" class="metrics-grid">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>&copy; 2025 www.adx-google.com | 数据来源: Adoptima ADX API | 自动更新于每小时</p>
+        </footer>
+    </div>
+
+    <div id="loadingSpinner" class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>加载中...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

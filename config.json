@@ -1,0 +1,12 @@
+{
+    "api": {
+        "base_url": "https://api.adoptima.net/get_app_data/get_adx",
+        "username": "my",
+        "password": "Netlink@123"
+    },
+    "storage": {
+        "data_directory": "/Users/k/Desktop/api接口/data",
+        "log_directory": "/Users/k/Desktop/api接口/logs"
+    },
+    "timezone": "Asia/Shanghai"
+}

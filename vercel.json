@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "name": "api-adx-google",
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/data.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/data",
+      "dest": "/api/data.py"
+    },
+    {
+      "src": "/word/my/(.*)",
+      "dest": "/word/my/$1"
+    },
+    {
+      "src": "/word/my",
+      "dest": "/word/my/index.html"
+    },
+    {
+      "src": "/word",
+      "status": 302,
+      "headers": {
+        "Location": "https://admanager.google.com/"
+      }
+    },
+    {
+      "src": "/",
+      "status": 302,
+      "headers": {
+        "Location": "https://admanager.google.com/"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "status": 302,
+      "headers": {
+        "Location": "https://admanager.google.com/"
+      }
+    }
+  ],
+  "env": {
+    "API_USERNAME": "@api_username",
+    "API_PASSWORD": "@api_password"
+  }
+}
