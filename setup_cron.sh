@@ -27,11 +27,11 @@ if grep -q "data_sync.py" "$TEMP_CRON"; then
     mv "${TEMP_CRON}.new" "$TEMP_CRON"
 fi
 
-# 添加新的cron任务 - 每小时的第5分钟执行
-echo "5 * * * * cd $SCRIPT_DIR && /usr/bin/python3 $PYTHON_SCRIPT >> $SCRIPT_DIR/logs/cron.log 2>&1" >> "$TEMP_CRON"
+# 添加新的cron任务 - 每小时的第5分钟执行 [已禁用]
+# echo "5 * * * * cd $SCRIPT_DIR && /usr/bin/python3 $PYTHON_SCRIPT >> $SCRIPT_DIR/logs/cron.log 2>&1" >> "$TEMP_CRON"
 
-# 安装新的crontab
-crontab "$TEMP_CRON"
+# 安装新的crontab [已禁用]
+# crontab "$TEMP_CRON"
 
 # 清理临时文件
 rm "$TEMP_CRON"
